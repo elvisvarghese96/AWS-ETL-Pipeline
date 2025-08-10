@@ -16,7 +16,7 @@ Load: The transformed data is then converted into the Apache Parquet format, whi
 
 Post-Processing: Finally, the function triggers an AWS Glue Crawler to automatically discover the schema of the newly created Parquet file and update the AWS Glue Data Catalog. This makes the transformed data immediately available for querying via services like Amazon Athena.
 
-- Technologies Used
+### Technologies Used
 AWS Lambda: The serverless compute service that hosts the Python ETL code.
 
 Amazon S3: Used as the data lake for both raw JSON files and the processed Parquet files.
@@ -29,14 +29,14 @@ Pyarrow: Used by Pandas to efficiently write the data into the Parquet file form
 
 AWS Glue: A fully managed ETL service, specifically its crawler, used to discover and catalog the transformed data.
 
-- Lambda Function Breakdown
+### Lambda Function Breakdown
 transform(data): This core function takes the raw JSON data (a list of dictionaries) and flattens it into a list of dictionaries, one for each product. It then converts this into a pandas.DataFrame.
 
 lambda_handler(event, context): The entry point of the Lambda function. It handles the S3 trigger event, fetches the file, calls the transform function, and orchestrates the loading and Glue Crawler steps.
 
 Dependencies: The function requires the following libraries, which must be included in the deployment package: boto3, pandas, pyarrow.
 
-- Setup & Deployment
+### Setup & Deployment
 Create an S3 Bucket: Set up an S3 bucket with a designated folder for raw data (e.g., raw_orders_data/) and a staging folder for the processed Parquet files (e.g., orders_data_parquet/).
 
 Package the Lambda Function: Create a deployment package (a .zip file) containing the Python code and its dependencies (pandas, pyarrow).
