@@ -30,25 +30,19 @@ Pyarrow: Used by Pandas to efficiently write the data into the Parquet file form
 AWS Glue: A fully managed ETL service, specifically its crawler, used to discover and catalog the transformed data.
 
 ### Lambda Function Breakdown
-transform(data): This core function takes the raw JSON data (a list of dictionaries) and flattens it into a list of dictionaries, one for each product. It then converts this into a pandas.DataFrame.
+Transform(data): This core function takes the raw JSON data (a list of dictionaries) and flattens it into a list of dictionaries, one for each product. It then converts this into a pandas.DataFrame.
 
 lambda_handler(event, context): The entry point of the Lambda function. It handles the S3 trigger event, fetches the file, calls the transform function, and orchestrates the loading and Glue Crawler steps.
 
 Dependencies: The function requires the following libraries, which must be included in the deployment package: boto3, pandas, pyarrow.
 
 ### Setup & Deployment
-Create an S3 Bucket: Set up an S3 bucket with a designated folder for raw data (e.g., raw_orders_data/) and a staging folder for the processed Parquet files (e.g., orders_data_parquet/).
+Created an S3 Bucket with a designated folder for raw data (e.g., raw_orders_data/) and a staging folder for the processed Parquet files (e.g., orders_data_parquet/).
 
-Package the Lambda Function: Create a deployment package (a .zip file) containing the Python code and its dependencies (pandas, pyarrow).
+Lambda Function: Deployed package (a .zip file) containing the Python code and its dependencies (pandas, pyarrow).
 
-Create the Lambda Function: In the AWS Management Console, create a new Lambda function with the code from this project. Configure the handler as lambda_function.lambda_handler.
+Created the Lambda Function: In the AWS Management Console, created a new Lambda function with the code from this project. Configure the handler as lambda_function.lambda_handler.
 
-Configure the S3 Trigger: Add an S3 trigger to the Lambda function. Set it to trigger on a Put event in your raw_orders_data/ folder.
+Configured the S3 Trigger: Add an S3 trigger to the Lambda function. Set it to trigger on a Put event in your raw_orders_data/ folder.
 
-Create an IAM Role: Ensure the Lambda function's IAM role has permissions for:
-
-- s3:GetObject and s3:PutObject on your S3 bucket.
-
-- glue:StartCrawler to trigger the Glue job.
-
-Create the Glue Crawler: Set up an AWS Glue Crawler named etl-pipeline-orders. Configure its data source to be the orders_data_parquet/ folder in your S3 bucket.
+Glue Crawler: Set up an AWS Glue Crawler named etl-pipeline-orders. Configure its data source to be the orders_data_parquet/ folder in your S3 bucket.
