@@ -3,7 +3,7 @@
 ## **Overview**
 This project contains an AWS Lambda function that serves as a serverless ETL (Extract, Transform, Load) pipeline. It is designed to automatically process raw JSON order data, flatten its structure, and store it in a more efficient format for analysis.
 
-## How It Works
+### How It Works
 The pipeline is triggered automatically by an event-driven architecture and performs the following steps:
 
 Trigger: The Lambda function is invoked every time a new JSON file is uploaded to the designated S3 bucket.
