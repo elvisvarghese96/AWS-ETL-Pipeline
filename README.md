@@ -1,6 +1,6 @@
 # AWS-ETL-Pipeline
 
-AWS Lambda ETL Pipeline for Order Data
+## **Overview**
 This project contains an AWS Lambda function that serves as a serverless ETL (Extract, Transform, Load) pipeline. It is designed to automatically process raw JSON order data, flatten its structure, and store it in a more efficient format for analysis.
 
 - How It Works
